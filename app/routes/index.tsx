@@ -3,7 +3,7 @@ import { Box, Container, Heading, Stack, Button } from "@chakra-ui/react"
 import TrendGraph from "~/features/graphs/components/TrendGraph"
 
 export default function Index() {
-  const [count, setCount] = useState(0)
+  const [, setCount] = useState(0)
 
   return (
     <Box>
