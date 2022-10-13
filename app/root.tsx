@@ -13,7 +13,7 @@ import {
 import type { MetaFunction, LinksFunction } from "@remix-run/node" // Depends on the runtime you choose
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query"
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools"
-import { ServerStyleContext, ClientStyleContext } from "./context"
+import { ServerStyleContext, ClientStyleContext } from "./libs/chakra-ui"
 
 import { initChartJs } from "~/libs/chart"
 initChartJs()
