@@ -15,7 +15,7 @@ export default function Index() {
           <Heading>Remix dashboard example</Heading>
 
           <TrendGraph
-            isLoading={isFetching}
+            isFetching={isFetching}
             labels={data?.labels}
             datasets={data?.datasets}
           ></TrendGraph>
