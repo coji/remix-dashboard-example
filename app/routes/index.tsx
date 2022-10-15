@@ -4,15 +4,20 @@ import {
   Heading,
   Stack,
   Button,
-  Progress,
+  Progress
 } from "@chakra-ui/react"
 import { useData } from "~/features/data/hooks/useData"
-import TrendGraph from "~/features/graphs/components/TrendGraph"
 import { useQueryClient } from "@tanstack/react-query"
+import { useTrendGraph } from "~/features/graphs/hooks/useTrendGraph"
 
 export default function Index() {
   const queryClient = useQueryClient()
   const { data, isFetching } = useData()
+  const { TrendGraph } = useTrendGraph({
+    labels: data?.labels,
+    datasets: data?.datasets,
+    isFetching
+  })
 
   return (
     <Box>
@@ -21,11 +26,7 @@ export default function Index() {
         <Stack>
           <Heading>Remix dashboard example</Heading>
 
-          <TrendGraph
-            isFetching={isFetching}
-            labels={data?.labels}
-            datasets={data?.datasets}
-          ></TrendGraph>
+          <TrendGraph />
 
           <Button
             width="full"

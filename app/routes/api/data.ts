@@ -12,7 +12,7 @@ export const loader = async (args: LoaderArgs) => {
     labels,
     datasets: [
       labels.map(() => faker.datatype.number({ min: 0, max: 20 })),
-      labels.map(() => faker.datatype.number({ min: 0, max: 200 })),
+      labels.map(() => faker.datatype.number({ min: 0, max: 1000 })),
     ],
   })
 }
