@@ -8,7 +8,7 @@ import {
   Legend,
   Tooltip,
   LineController,
-  BarController,
+  BarController
 } from "chart.js"
 
 export const initChartJs = () => {
