@@ -8,7 +8,7 @@ import {
   Meta,
   Outlet,
   Scripts,
-  ScrollRestoration,
+  ScrollRestoration
 } from "@remix-run/react"
 import type { MetaFunction, LinksFunction } from "@remix-run/node" // Depends on the runtime you choose
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query"
@@ -20,8 +20,8 @@ initChartJs()
 
 export const meta: MetaFunction = () => ({
   charset: "utf-8",
-  title: "New Remix App",
-  viewport: "width=device-width,initial-scale=1",
+  title: "Remix Dashboard Example",
+  viewport: "width=device-width,initial-scale=1"
 })
 
 export let links: LinksFunction = () => {
