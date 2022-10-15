@@ -46,7 +46,7 @@ interface TrendGraphProps {
   isFetching: boolean
 }
 export default function TrendGraph({
-  labels = ["loading"],
+  labels = ["Loading..."],
   datasets = [[], []],
   isFetching,
 }: TrendGraphProps) {
@@ -62,12 +62,16 @@ export default function TrendGraph({
           labels,
           datasets: [
             {
-              type: "line" as const,
+              type: "line",
               label: "Review Time",
               borderColor: (ctx: ScriptableContext<"line">) =>
                 isFetching ? "rgba(255, 99, 132, .2)" : "rgb(255, 99, 132)",
               backgroundColor: (ctx: ScriptableContext<"line">) =>
-                isFetching ? "rgba(255,99,132, .2)" : "rgb(255,99,132)",
+                isFetching
+                  ? "rgba(255,99,132, .2)"
+                  : ctx.active
+                  ? "rgb(255,0,0)"
+                  : "rgb(255,99,132)",
               borderWidth: 2,
               tension: 0.25,
               fill: false,
@@ -75,13 +79,13 @@ export default function TrendGraph({
               yAxisID: "y1",
             },
             {
-              type: "bar" as const,
+              type: "bar",
               label: "Pulls",
               backgroundColor: (ctx: ScriptableContext<"bar">) =>
                 isFetching
                   ? "rgba(53, 162, 235, .2)"
                   : ctx.active
-                  ? "rgb(0,0,0)"
+                  ? "rgb(84,193,255)"
                   : "rgb(53, 162, 235)",
               data: datasets[1],
               yAxisID: "y2",

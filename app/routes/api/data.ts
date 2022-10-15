@@ -5,7 +5,8 @@ import { setTimeout } from "node:timers/promises"
 const labels = ["January", "February", "March", "April", "May", "June", "July"]
 
 export const loader = async (args: LoaderArgs) => {
-  await setTimeout(1000)
+  const timeout = Math.random() * 3000
+  await setTimeout(timeout)
 
   return json({
     labels,

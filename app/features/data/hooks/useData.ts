@@ -7,6 +7,10 @@ export const useData = () => {
   return useQuery(
     ["data"],
     async () =>
-      (await ky.get("/api/data").json()) as SerializeFrom<typeof loader>
+      (await ky.get("/api/data").json()) as SerializeFrom<typeof loader>,
+    {
+      refetchOnReconnect: false,
+      refetchOnWindowFocus: false,
+    }
   )
 }
