@@ -76,7 +76,15 @@ const Document = withEmotionCache(
   }
 )
 
-const queryClient = new QueryClient()
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+      refetchOnReconnect: false,
+      refetchOnMount: false
+    }
+  }
+})
 
 export default function App() {
   return (

@@ -3,14 +3,10 @@ import ky from "ky"
 import type { loader } from "~/routes/api/data"
 import type { SerializeFrom } from "@remix-run/node"
 
-export const useData = () => {
+export const useData = (apiEndpoint: string) => {
   return useQuery(
-    ["data"],
+    ["data", apiEndpoint],
     async () =>
-      (await ky.get("/api/data").json()) as SerializeFrom<typeof loader>,
-    {
-      refetchOnReconnect: false,
-      refetchOnWindowFocus: false
-    }
+      (await ky.get(apiEndpoint).json()) as SerializeFrom<typeof loader>
   )
 }

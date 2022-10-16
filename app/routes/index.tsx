@@ -1,3 +1,4 @@
+import { Suspense } from "react"
 import {
   Box,
   Container,
@@ -9,18 +10,12 @@ import {
   Icon
 } from "@chakra-ui/react"
 import { AiOutlineTwitter, AiOutlineGithub } from "react-icons/ai"
-import { useData } from "~/features/data/hooks/useData"
 import { useQueryClient } from "@tanstack/react-query"
 import { useTrendGraph } from "~/features/graphs/hooks/useTrendGraph"
 
 export default function Index() {
   const queryClient = useQueryClient()
-  const { data, isFetching } = useData()
-  const { TrendGraph } = useTrendGraph({
-    labels: data?.labels,
-    datasets: data?.datasets,
-    isFetching
-  })
+  const { TrendGraph, isFetching } = useTrendGraph("/api/data")
 
   return (
     <Box display="grid" gridTemplateRows="auto 1fr auto" height="100vh">
@@ -29,7 +24,9 @@ export default function Index() {
         <Stack>
           <Heading>Remix dashboard example</Heading>
 
-          <TrendGraph />
+          <Suspense fallback={<div>Loading...</div>}>
+            <TrendGraph />
+          </Suspense>
 
           <Button
             width="full"

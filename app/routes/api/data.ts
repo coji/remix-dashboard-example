@@ -13,6 +13,10 @@ export const loader = async (args: LoaderArgs) => {
     datasets: [
       labels.map(() => faker.datatype.number({ min: 0, max: 20 })),
       labels.map(() => faker.datatype.number({ min: 0, max: 1000 }))
-    ]
+    ],
+    axisLabels: {
+      y1: "Review Time",
+      y2: "Pulls"
+    }
   })
 }
