@@ -1,5 +1,4 @@
 import { useRef, useMemo, useCallback } from "react"
-import { Box } from "@chakra-ui/react"
 import type { Chart as ChartJS, ScriptableContext } from "chart.js"
 import type { ChartProps } from "react-chartjs-2"
 import { Chart, getElementsAtEvent } from "react-chartjs-2"
@@ -15,7 +14,7 @@ export const useTrendGraph = (apiEndpoint: string) => {
       datasets: [
         {
           type: "line",
-          label: apiData?.axisLabels.y1,
+          label: apiData?.axisLabels.y1 ?? "",
           borderColor: (ctx: ScriptableContext<"line">) =>
             isFetching ? "rgba(255, 99, 132, .2)" : "rgb(255, 99, 132)",
           backgroundColor: (ctx: ScriptableContext<"line">) =>
@@ -31,7 +30,7 @@ export const useTrendGraph = (apiEndpoint: string) => {
         },
         {
           type: "bar",
-          label: apiData?.axisLabels.y2,
+          label: apiData?.axisLabels.y2 ?? "",
           backgroundColor: (ctx: ScriptableContext<"bar">) =>
             isFetching
               ? "rgba(53, 162, 235, .2)"
@@ -89,19 +88,17 @@ export const useTrendGraph = (apiEndpoint: string) => {
   const chartRef = useRef<ChartJS<"line" | "bar", number[], string>>()
   const TrendGraph = useCallback(
     () => (
-      <Box>
-        <Chart
-          ref={chartRef}
-          type="bar"
-          data={data}
-          options={options}
-          onClick={(e) => {
-            if (!chartRef.current) return
-            const elements = getElementsAtEvent(chartRef.current, e)
-            console.log("clicked elements:", elements)
-          }}
-        />
-      </Box>
+      <Chart
+        ref={chartRef}
+        type="bar"
+        data={data}
+        options={options}
+        onClick={(e) => {
+          if (!chartRef.current) return
+          const elements = getElementsAtEvent(chartRef.current, e)
+          console.log("clicked elements:", elements)
+        }}
+      />
     ),
     [data, options]
   )
