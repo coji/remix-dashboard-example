@@ -8,23 +8,22 @@ import {
   Icon
 } from "@chakra-ui/react"
 import { AiOutlineTwitter, AiOutlineGithub } from "react-icons/ai"
-import { useQueryClient } from "@tanstack/react-query"
-import { useTrendGraph } from "~/features/graphs/hooks/useTrendGraph"
+import { useQueryClient, useIsFetching } from "@tanstack/react-query"
+import { TrendGraph } from "~/features/graphs/components/TrendGraph"
 
 export default function Index() {
   const queryClient = useQueryClient()
+  const isFetching = useIsFetching()
+  /*
   const { TrendGraph } = useTrendGraph("/api/data")
   const { TrendGraph: Graph2 } = useTrendGraph("/api/data?id=2")
   const { TrendGraph: Graph3 } = useTrendGraph("/api/data?id=3")
   const { TrendGraph: Graph4 } = useTrendGraph("/api/data?id=4")
+  */
 
   return (
     <Box display="grid" gridTemplateRows="auto 1fr auto" height="100vh">
-      <Progress
-        size="xs"
-        bgColor="white"
-        isIndeterminate={queryClient.isFetching() > 0}
-      />
+      <Progress size="xs" bgColor="white" isIndeterminate={isFetching > 0} />
 
       <Box>
         <Heading>Remix dashboard example</Heading>
@@ -37,23 +36,27 @@ export default function Index() {
           w="100vw"
         >
           <Box>
-            <TrendGraph />
+            <Heading></Heading>
+            <TrendGraph apiEndpoint="/api/data?id=1" />
           </Box>
+
           <Box>
-            <Graph2 />
+            <TrendGraph apiEndpoint="/api/data?id=2" />
           </Box>
+
           <Box>
-            <Graph3 />
+            <TrendGraph apiEndpoint="/api/data?id=3" />
           </Box>
+
           <Box>
-            <Graph4 />
+            <TrendGraph apiEndpoint="/api/data?id=4" />
           </Box>
         </Box>
 
         <Button
           width="full"
           onClick={() => queryClient.invalidateQueries()}
-          isLoading={queryClient.isFetching() > 0}
+          isLoading={isFetching > 0}
         >
           Load
         </Button>
